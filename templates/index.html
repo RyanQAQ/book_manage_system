@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图书管理系统</title>
+
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.3.0/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{% static 'css/index.css' %}" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-info">
+            <div class="row">
+                <div class="col  text-center">序号</div>
+                <div class="col  text-center">名称</div>
+                <div class="col  text-center">价格</div>
+                <div class="col  text-center">作者</div>
+                <div class="col  text-center">出版社</div>
+                <div class="col  text-center">出版日期</div>
+                <div class="col  text-center">分类</div>
+                <div class="col  text-center">操作</div>
+            </div>
+
+        </div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                {% for book in books %}
+                    <div class="row">
+                        <div class="col text-center">{{ book.id }}</div>
+                        <div class="col text-center">{{ book.name }}</div>
+                        <div class="col text-center">{{ book.price }}</div>
+                        <div class="col text-center">{{ book.author }}</div>
+                        <div class="col text-center">{{ book.publisher }}</div>
+                        <div class="col text-center">{{ book.pub_date }}</div>
+                        <div class="col text-center">{{ book.sort }}</div>
+                        <div class="col text-center">删除</div>
+                    </div>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
