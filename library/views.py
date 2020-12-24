@@ -37,3 +37,7 @@ def save_edit(request, edit_id):
     cursor.close()
     conn.close()
     return redirect('/')
+
+
+def add(request):
+    return render(request, 'add.html')
