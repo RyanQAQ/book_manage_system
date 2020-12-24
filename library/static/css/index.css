@@ -4,3 +4,9 @@
   }
 }
 
+.col {
+  padding: 5px !important ;
+  margin-bottom: 5px;
+  line-height: 40px;
+}
+
