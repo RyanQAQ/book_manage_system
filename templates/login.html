@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.3.0/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+<div class="container mt-5">
+    <form action="{% url 'signin' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group text-center">
+            <label for="inputName" class="col-sm-2 col-form-label text-right">账户：</label>
+            <input type="text" class="form-control" name="inputName" id="inputName">
+        </div>
+        <div class="form-group text-center">
+            <label for="inputPassword" class="col-sm-2 col-form-label text-right">密码：</label>
+            <input type="password" class="form-control" name="inputPassword" id="inputPassword">
+        </div>
+        <div class="form-group text-center">
+            <p class="text-danger fs ml-5">{{ hint }}</p>
+        </div>
+        <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary ml-5">登录</button>
+            <a href="/" class="btn btn-primary ml-3">返回首页</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

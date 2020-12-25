@@ -20,7 +20,15 @@
             <div class="col">
                 <a href="{% url 'add' %}" class="text-info">添加图书</a>
             </div>
-            <div class="col">登录 注册</div>
+            <div class="col">
+                {% if request.session.username %}
+                    {{ request.session.username }} &nbsp;
+                    <a href="/logout/">注销</a>
+                {% else %}
+                    <a href="/login/">登录</a>
+                    <a href="">注册</a>
+                {% endif %}
+            </div>
         </div>
     </div>
     <div class="card">
@@ -41,8 +49,8 @@
             <ul class="list-group list-group-flush">
                 {% for book in books %}
                     <div class="row">
-                        <div class="col text-center">{{ book.id }}</div>
-                        <div class="col text-center">{{ book.name }}</div>
+                        <div id="book_id" class="col text-center">{{ book.id }}</div>
+                        <div id="book_name" class="col text-center">{{ book.name }}</div>
                         <div class="col text-center">{{ book.price }}</div>
                         <div class="col text-center">{{ book.author }}</div>
                         <div class="col text-center">{{ book.publisher.name }}</div>
@@ -50,7 +58,7 @@
                         <div class="col text-center">{{ book.sort.name }}</div>
                         <div class="col text-center">
                             <a type="button" href="{% url 'edit' book.id %}" class="btn btn-primary">编辑</a>
-                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                            <button id="del" type="button" class="btn btn-danger" data-toggle="modal"
                                     data-target="#staticBackdrop">
                                 删除
                             </button>
@@ -65,13 +73,14 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <div class="modal-body">
-                                            确定要删除《{{ book.name }}》？
+                                        <div class="modal-body" id="tip">
+                                            确定删除《{{ book.name }}》？
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">取消
                                             </button>
-                                            <button type="button" class="btn btn-primary">确定</button>
+                                            <a type="button" href="{% url 'del' book.id %}"
+                                               class="btn btn-primary">确定</a>
                                         </div>
                                     </div>
                                 </div>
@@ -86,4 +95,10 @@
 
 </div>
 </body>
+<script>
+    $('#del').click(() => {
+        book_id = $(this).parent().parent().children(":first").text();
+        book_name = $(this).parent().parent().children(":first").next().text();
+    })
+</script>
 </html>

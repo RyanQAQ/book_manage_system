@@ -33,3 +33,13 @@ class Book(models.Model):
         db_table = 'books'
         verbose_name = '书籍'
         verbose_name_plural = verbose_name
+
+
+class User(models.Model):
+    username = models.CharField(max_length=8, verbose_name='用户名')
+    password = models.CharField(max_length=12, verbose_name='密码')
+
+    class Meta:
+        db_table = 'user'
+        verbose_name = '用户'
+        verbose_name_plural = verbose_name
