@@ -1,4 +1,5 @@
 import pymysql
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, HttpResponse, redirect
 from django.views import generic
 from library.models import Publisher, Book, Sort, User
@@ -78,15 +79,10 @@ def save_add(request):
 
 @required_login
 def del_book(request, del_id):
-    conn = pymysql.connect(host='121.199.28.54', port=3306, user='root', passwd='lyk0915',
-                           db='book_manage_sys', charset='utf8')
-    cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
-    sql = "delete from books where id={0};".format(del_id)
-    cursor.execute(sql)
-    conn.commit()
-    cursor.close()
-    conn.close()
-    return redirect('/')
+    b = Book.objects.get(id=del_id)
+    print('bbb', b)
+    b.delete()
+    return HttpResponseRedirect('/')
 
 
 def login(request):
