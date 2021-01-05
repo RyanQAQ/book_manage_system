@@ -80,7 +80,6 @@ def save_add(request):
 @required_login
 def del_book(request, del_id):
     b = Book.objects.get(id=del_id)
-    print('bbb', b)
     b.delete()
     return HttpResponseRedirect('/')
 
